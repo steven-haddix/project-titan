@@ -1,0 +1,27 @@
+const merge = require('lodash/merge')
+
+const config = {
+    all: {
+        env: process.env.NODE_ENV || 'development',
+        isDev: process.env.NODE_ENV !== 'production',
+        basename: process.env.PUBLIC_PATH,
+        isBrowser: typeof window !== 'undefined',
+        apiUrl: 'https://66rp3jorm1.execute-api.us-east-1.amazonaws.com/prod/api/',
+        fbAppId: '991453140998882',
+        googleClientId: '464712936089-q953apdu1bjiqtcjndktnnk1ts4f2cgv.apps.googleusercontent.com',
+        gtmId: 'GTM-WX5ZNVC',
+        cognito: {
+            USER_POOL_ID : 'us-east-1_n0wdZW9H9',
+            APP_CLIENT_ID : '7bggm65t31n55c9c2kmtlvrfd6',
+            REGION: 'us-east-1',
+            IDENTITY_POOL_ID: 'us-east-1:9f40f653-5859-49e6-8bde-503c779bb46d',
+        }
+    },
+    test: {},
+    development: {},
+    production: {
+        apiUrl: 'https://jsonplaceholder.typicode.com',
+    },
+}
+
+module.exports = merge(config.all, config[config.all.env])
