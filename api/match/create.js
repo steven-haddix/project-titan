@@ -5,12 +5,12 @@ import { success, failure } from './libs/response-lib';
 
 export async function getPlayerRank(playerId) {
     const params = {
-        TableName: 'players',
+        TableName: 'TitanPlayer',
         // 'Key' defines the partition key and sort key of the time to be retrieved
         // - 'userId': federated identity ID of the authenticated user
         // - 'noteId': path parameter
         Key: {
-            playId: playerId,
+            playerId: playerId,
         },
     };
 
@@ -31,7 +31,7 @@ export async function getPlayerRank(playerId) {
 
 export async function updatePlayerRank(playerId, rank) {
     const params = {
-        TableName: 'players',
+        TableName: 'TitanPlayer',
         // 'Key' defines the partition key and sort key of the time to be updated
         // - 'userId': User Pool sub of the authenticated user
         // - 'noteId': path parameter
@@ -56,7 +56,7 @@ export async function updatePlayerRank(playerId, rank) {
 
 export async function main(event, context, callback) {
     const params = {
-        TableName: 'matches',
+        TableName: 'TitanMatches',
         Item: {
             winnerId: event.winnerId,
             loserId: event.loserId,

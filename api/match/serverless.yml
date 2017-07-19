@@ -41,3 +41,32 @@ functions:
           path: api/match/create
           method: post
           cors: true
+
+resources:
+  Resources:
+    matchesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TitanMatches
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    playersTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: TitanPlayers
+            AttributeDefinitions:
+              - AttributeName: email
+                AttributeType: S
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1

@@ -45,3 +45,35 @@ export const authLoginFailure = (error, request) => ({
 })
 
 export const authLogout = () => ({ type: AUTH_LOGOUT })
+
+export const AUTH_PASS_CHANGE_REQUEST = 'AUTH_PASS_CHANGE_REQUEST'
+export const AUTH_PASS_CHANGE_SUCCESS = 'AUTH_PASS_CHANGE_SUCCESS'
+export const AUTH_PASS_CHANGE_FAILURE = 'AUTH_PASS_CHANGE_FAILURE'
+
+export const authChangePasswordRequest = (service, { ...options } = {}) => ({
+    type: AUTH_PASS_CHANGE_REQUEST,
+    payload: {
+        ...options,
+    },
+    meta: {
+        // https://github.com/diegohaz/arc/wiki/Example-redux-modules#gtm
+        gtm: service,
+    },
+})
+
+export const authChangePasswordSuccess = (user, request) => ({
+    type: AUTH_PASS_CHANGE_SUCCESS,
+    payload: user,
+    meta: {
+        request,
+    },
+})
+
+export const authChangePasswordFailure = (error, request) => ({
+    type: AUTH_PASS_CHANGE_FAILURE,
+    error: true,
+    payload: error,
+    meta: {
+        request,
+    },
+})
