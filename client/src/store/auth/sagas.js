@@ -1,4 +1,5 @@
 import { take, put, call, fork } from 'redux-saga/effects'
+import { SubmissionError } from 'redux-form'
 import {
     CognitoUserPool,
     AuthenticationDetails,
@@ -30,7 +31,7 @@ function cognitoLoginPromise(req) {
     ));
 }
 
-export function* loginCognitoUserPool({ username, password } = {}) {
+export function* loginCognitoUserPool({ username, password } = {}, { thunk }) {
     const userPool = new CognitoUserPool({
         UserPoolId: config.cognito.USER_POOL_ID,
         ClientId: config.cognito.APP_CLIENT_ID
@@ -48,9 +49,9 @@ export function* loginCognitoUserPool({ username, password } = {}) {
     try {
         const resp = yield call(cognitoLoginPromise, request)
         console.log(resp)
-        yield put(actions.authLoginSuccess(resp, request))
+        yield put(actions.authLoginSuccess(resp, request, thunk))
     } catch (e) {
-        yield put(actions.authLoginFailure(e, request))
+        yield put(actions.authLoginFailure(new SubmissionError({ _error: e.message }), request, thunk))
     }
 }
 
@@ -81,8 +82,8 @@ export function* watchLoginCognitoPool() {
     // const { payload } = yield take(serviceAction('PREPARE', 'cognito'))
     // yield call(prepareGoogle, payload)
     while (true) {
-        const { payload } = yield take(serviceAction('REQUEST', 'cognito'))
-        yield call(loginCognitoUserPool, payload)
+        const { payload, meta } = yield take(serviceAction('REQUEST', 'cognito'))
+        yield call(loginCognitoUserPool, payload, meta)
     }
 }
 

@@ -22,25 +22,29 @@ export const authLoginRequest = (service, { clientId, ...options } = {}) => ({
         ...options,
     },
     meta: {
+        thunk: `${service}Login`,
         // https://github.com/diegohaz/arc/wiki/Example-redux-modules#gtm
         gtm: service,
     },
 })
 
-export const authLoginSuccess = (user, request) => ({
+export const authLoginSuccess = (user, request, thunk) => ({
     type: AUTH_LOGIN_SUCCESS,
     payload: user,
     meta: {
         request,
+        thunk
     },
 })
 
-export const authLoginFailure = (error, request) => ({
+export const authLoginFailure = (error, request, thunk) => ({
     type: AUTH_LOGIN_FAILURE,
     error: true,
     payload: error,
     meta: {
+        _error: 'test',
         request,
+        thunk
     },
 })
 

@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { PageTemplate } from 'components'
-import { Login } from 'containers'
+import { PageTemplate, Header } from 'components'
+import { LoginForm } from 'containers'
 
 const HomePage = () => {
     return (
-        <PageTemplate header={<div/>} hero={<div/>} footer={<div/>}>
-            <Login />
+        <PageTemplate header={<Header/>} hero={<div/>} footer={<div/>}>
         </PageTemplate>
     )
 }
