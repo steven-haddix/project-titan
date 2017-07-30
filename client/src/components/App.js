@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { injectGlobal, ThemeProvider } from 'styled-components'
 
-import { HomePage, SamplePage, NotFoundPage } from 'components'
+import { HomePage, SignInPage, SignUpPage, ConfirmPage, NotFoundPage } from 'components'
 import { GoogleTagManager } from 'containers'
 
 // https://github.com/diegohaz/arc/wiki/Styling
@@ -14,19 +14,20 @@ injectGlobal`
   }
 `
 
-const App = () => {
-    return (
-        <div>
-            <GoogleTagManager />
-            <ThemeProvider theme={theme}>
-                <Switch>
-                    <Route path="/" component={HomePage} exact />
-                    <Route path="/sample-page" component={SamplePage} />
-                    <Route component={NotFoundPage} />
-                </Switch>
-            </ThemeProvider>
-        </div>
-    )
-}
+const App = () => (
+    <div>
+        <GoogleTagManager />
+        <ThemeProvider theme={theme}>
+            <Switch>
+                <Route path="/" component={HomePage} exact />
+                <Route path="/sign-in" component={SignInPage} />
+                <Route path="/sign-up" component={SignUpPage} />
+                <Route path="/confirm" component={ConfirmPage} />
+                <Route path="*" component={NotFoundPage} />
+            </Switch>
+        </ThemeProvider>
+    </div>
+)
+
 
 export default App

@@ -8,12 +8,14 @@ export const checkStatus = (response) => {
     if (response.ok) {
         return response
     }
-    const error = new Error(`${response.status} ${response.statusText}`)
+    const error = new Error(`${response.status} ${response.body}`)
     error.response = response
     throw error
 }
 
-export const parseJSON = response => response.json()
+export const parseJSON = response => {
+    return response.json()
+}
 
 export const parseSettings = ({ method = 'get', data, locale, ...otherSettings } = {}) => {
     const headers = {

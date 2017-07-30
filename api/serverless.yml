@@ -1,4 +1,4 @@
-service: titan-match-api
+service: titan-api
 
 plugins:
   - serverless-webpack
@@ -9,7 +9,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: prod
+  stage: dev
   region: us-east-1
   profile: serverless
 
@@ -26,21 +26,25 @@ provider:
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
-  # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /notes
-  # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call
-  # - authorizer: authenticate the api via Cognito User Pool. Update the 'arn'
-  #     with your own User Pool ARN
-  create:
-    handler: index.create
+  match-create:
+    handler: match/create.handler
     memorySize: 128
     events:
       - http:
           path: api/match/create
           method: post
           cors: true
+  player-list:
+    handler: player/list.handler
+    memorySize: 128
+    events:
+      - http:
+          path: api/player/list
+          method: get
+          cors: true
+  player-create:
+    handler: player/create.handler
+    memorySize: 128
 
 resources:
   Resources:
@@ -49,10 +53,10 @@ resources:
       Properties:
         TableName: TitanMatches
         AttributeDefinitions:
-          - AttributeName: email
+          - AttributeName: matchId
             AttributeType: S
         KeySchema:
-          - AttributeName: email
+          - AttributeName: matchId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -62,10 +66,10 @@ resources:
           Properties:
             TableName: TitanPlayers
             AttributeDefinitions:
-              - AttributeName: email
+              - AttributeName: playerId
                 AttributeType: S
             KeySchema:
-              - AttributeName: email
+              - AttributeName: playerId
                 KeyType: HASH
             ProvisionedThroughput:
               ReadCapacityUnits: 1

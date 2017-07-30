@@ -1,5 +1,5 @@
 {
-  "name": "titan-elo-api",
+  "name": "titan-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,13 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "arpad": "^1.0.1",
-    "node-uuid": "^1.4.8"
-  },
-  "devDependencies": {
     "aws-sdk": "^2.84.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "serverless-webpack": "^2.0.0",
+    "uuid": "^3.1.0",
     "webpack": "^3.3.0",
     "webpack-node-externals": "^1.6.0"
   }

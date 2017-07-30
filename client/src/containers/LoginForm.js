@@ -3,20 +3,22 @@ import { reduxForm } from 'redux-form'
 import { authLoginRequest } from 'store/actions'
 import { createValidator, required } from 'services/validation'
 
-import { LoginModal } from 'components'
+import { LoginForm } from 'components'
 
-const LoginFormContainer = props => <LoginModal {...props} />
+const LoginFormContainer = props => <LoginForm {...props} />
 
-const onSubmit = (data, dispatch) => dispatch(authLoginRequest('cognito', data))
+const onSubmit = (data, dispatch, props) =>
+    dispatch(authLoginRequest('cognito', data))
+        .then(() => props.history.push('/'))
 
 const validate = createValidator({
-    username: [required],
-    password: [required],
+    Username: [required],
+    Password: [required],
 })
 
 export default reduxForm({
     form: 'LoginForm',
-    destroyOnUnmount: false,
+    destroyOnUnmount: true,
     onSubmit,
     validate,
 })(LoginFormContainer)
