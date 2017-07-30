@@ -1,0 +1,75 @@
+service: titan-api
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpackIncludeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+  profile: serverless
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+functions:
+  match-create:
+    handler: matcher/create.handler
+    memorySize: 128
+    events:
+      - http:
+          path: api/match/create
+          method: post
+          cors: true
+  player-list:
+    handler: player/list.handler
+    memorySize: 128
+    events:
+      - http:
+          path: api/player/list
+          method: post
+          cors: true
+  player-create:
+    handler: player/create.handler
+    memorySize: 128
+
+resources:
+  matchesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: TitanMatches
+      AttributeDefinitions:
+        - AttributeName: matchId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: matchId
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+  playersTable:
+        Type: AWS::DynamoDB::Table
+        Properties:
+          TableName: TitanPlayers
+          AttributeDefinitions:
+            - AttributeName: playerId
+              AttributeType: S
+          KeySchema:
+            - AttributeName: playerId
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1

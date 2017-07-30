@@ -8,7 +8,11 @@ process.env.NODE_ENV = 'production';
 module.exports = {
     // Use all js files in project root (except
     // the webpack config) as an entry
-    entry: globEntries('!(webpack.config).js'),
+    entry: {
+        'match/create': 'match/create.js',
+        'player/create': 'player/create.js',
+        'player/list': 'player/list.js'
+    },
     target: 'node',
     // Since 'aws-sdk' is not compatible with webpack,
     // we exclude all node dependencies
