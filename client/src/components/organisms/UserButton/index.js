@@ -25,8 +25,7 @@ const UserButton = ({ user, onLogin, onLogout, ...props }) => {
           </InnerButton>
         </Button>
       }
-      {!user && <Button {...props} onClick={onLogin}>Sign in</Button>}
-      <LoginModal />
+      {!user && <Button to="/sign-in" {...props}>Sign in</Button>}
     </div>
   )
 }

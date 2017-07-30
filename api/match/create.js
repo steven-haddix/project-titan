@@ -1,11 +1,11 @@
 import uuid from 'node-uuid'
 import Elo from 'arpad';
-import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
+import * as dynamoDbLib from '../libs/dynamodb-lib';
+import { success, failure } from '../libs/response-lib';
 
 export async function getPlayerRank(playerId) {
     const params = {
-        TableName: 'TitanPlayer',
+        TableName: 'TitanPlayers',
         // 'Key' defines the partition key and sort key of the time to be retrieved
         // - 'userId': federated identity ID of the authenticated user
         // - 'noteId': path parameter
@@ -31,7 +31,7 @@ export async function getPlayerRank(playerId) {
 
 export async function updatePlayerRank(playerId, rank) {
     const params = {
-        TableName: 'TitanPlayer',
+        TableName: 'TitanPlayers',
         // 'Key' defines the partition key and sort key of the time to be updated
         // - 'userId': User Pool sub of the authenticated user
         // - 'noteId': path parameter

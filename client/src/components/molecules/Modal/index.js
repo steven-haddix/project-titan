@@ -92,7 +92,6 @@ const StyledReactModal = styled(({ className, ...props }) =>
 
 const Modal = ({ children, title, closeable, onClose, ...props }) => {
   const hasHeader = title || closeable
-    console.log(children)
   return (
     <StyledReactModal
       contentLabel={title || 'Modal'}
