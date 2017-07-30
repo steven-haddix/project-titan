@@ -27,7 +27,7 @@ provider:
 
 functions:
   match-create:
-    handler: matcher/create.handler
+    handler: match/create.handler
     memorySize: 128
     events:
       - http:
@@ -47,29 +47,30 @@ functions:
     memorySize: 128
 
 resources:
-  matchesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: TitanMatches
-      AttributeDefinitions:
-        - AttributeName: matchId
-          AttributeType: S
-      KeySchema:
-        - AttributeName: matchId
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-  playersTable:
-        Type: AWS::DynamoDB::Table
-        Properties:
-          TableName: TitanPlayers
-          AttributeDefinitions:
-            - AttributeName: playerId
-              AttributeType: S
-          KeySchema:
-            - AttributeName: playerId
-              KeyType: HASH
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
+  Resources:
+    matchesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TitanMatches
+        AttributeDefinitions:
+          - AttributeName: matchId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: matchId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    playersTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: TitanPlayers
+            AttributeDefinitions:
+              - AttributeName: playerId
+                AttributeType: S
+            KeySchema:
+              - AttributeName: playerId
+                KeyType: HASH
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1

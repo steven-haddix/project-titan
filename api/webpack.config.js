@@ -9,9 +9,9 @@ module.exports = {
     // Use all js files in project root (except
     // the webpack config) as an entry
     entry: {
-        'match/create': 'match/create.js',
-        'player/create': 'player/create.js',
-        'player/list': 'player/list.js'
+        'match/create': './match/create.js',
+        'player/create': './player/create.js',
+        'player/list': './player/list.js'
     },
     target: 'node',
     // Since 'aws-sdk' is not compatible with webpack,
