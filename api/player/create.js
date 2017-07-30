@@ -18,7 +18,7 @@ export async function handler(event, context, callback) {
 
     try {
         const result = await dynamoDbLib.call('put', params);
-        callback(null, result)
+        callback(null, event)
     } catch (e) {
         callback(e);
     }

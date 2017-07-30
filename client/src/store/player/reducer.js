@@ -1,20 +1,13 @@
 import jwtDecode from 'jwt-decode'
 import { initialState } from './selectors'
-import { AUTH_LOGIN_SUCCESS, AUTH_LOGOUT } from './actions'
+import { PLAYER_LIST_SUCCESS } from './actions'
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
-        case AUTH_LOGIN_SUCCESS:
-            payload.jwt ? localStorage.authToken = payload.jwt : null
+        case PLAYER_LIST_SUCCESS:
             return {
                 ...state,
-                user: jwtDecode(payload.jwt),
-            }
-        case AUTH_LOGOUT:
-            delete localStorage.authToken
-            return {
-                ...state,
-                user: initialState.user,
+                players: payload,
             }
         default:
             return state

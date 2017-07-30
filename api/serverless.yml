@@ -40,7 +40,7 @@ functions:
     events:
       - http:
           path: api/player/list
-          method: post
+          method: get
           cors: true
   player-create:
     handler: player/create.handler

@@ -7,7 +7,7 @@ import { playerListRequest } from 'store/actions'
 
 import { PlayerList } from 'components'
 
-class PostListContainer extends Component {
+class PlayerListContainer extends Component {
     static propTypes = {
         list: PropTypes.arrayOf(PropTypes.object).isRequired,
         limit: PropTypes.number,
@@ -25,13 +25,14 @@ class PostListContainer extends Component {
     }
 
     render() {
-        const { list, loading, failed } = this.props
+        const { list, loading, failed, state } = this.props
         return <PlayerList {...{ list, loading, failed }} />
     }
 }
 
 const mapStateToProps = state => ({
-    list: fromPlayer.getList(state, 'players'),
+    state: state,
+    list: fromPlayer.getList(state, 'player'),
     loading: isPending(state, 'playerList'),
     failed: hasFailed(state, 'playerList'),
 })
@@ -40,4 +41,4 @@ const mapDispatchToProps = (dispatch, { limit }) => ({
     readList: () => dispatch(playerListRequest('player', { _limit: limit })),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerListContainer)

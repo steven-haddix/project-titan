@@ -4,7 +4,7 @@ import * as actions from './actions'
 export function* playerList(api, { params }, { resource, thunk }) {
     try {
         const list = yield call([api, api.get], `/${resource}/list`, { params })
-        yield put(actions.playerListSuccess(list, { params }, thunk))
+        yield put(actions.playerListSuccess(resource, list, { params }, thunk))
     } catch (e) {
         yield put(actions.playerListFailure(resource, e, { params }, thunk))
     }
