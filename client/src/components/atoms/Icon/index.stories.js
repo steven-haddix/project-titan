@@ -1,7 +1,17 @@
-// https://github.com/diegohaz/arc/wiki/Example-components#icon
 import React from 'react'
+import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import Icon from '.'
+
+const StyledIcon = styled(Icon)`
+    color: #E44C1F;
+    fill: #E44C1F;
+
+    & > svg {
+      fill: currentcolor;
+      stroke: currentcolor;
+    }
+`
 
 storiesOf('Icon', module)
   .add('default', () => (
@@ -15,4 +25,7 @@ storiesOf('Icon', module)
   ))
   .add('height', () => (
     <Icon icon="close" height={100} />
+  ))
+  .add('spinner', () => (
+      <StyledIcon icon="spinner" height={100} />
   ))

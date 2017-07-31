@@ -13,10 +13,10 @@ const Nav = styled.nav`
   }
   a {
     font-weight: 300;
-    color: ${palette('grayscale', 2)};
+    color: ${palette('grayscale', 5)};
     font-size: 1.25rem;
     &.active {
-      color: ${palette('grayscale', 0)};
+      color: ${palette('grayscale', 5)};
     }
   }
 `

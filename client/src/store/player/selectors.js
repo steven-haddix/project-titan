@@ -8,7 +8,8 @@ export const initialResourceState = {
 export const getPlayerState = (state = initialState, resource) =>
     state[resource] || initialResourceState
 
-export const getList = (state = initialState, resource) => state.players
+export const getList = (state = initialState, resource) =>
+    getPlayerState(state, resource).players
 
 export const getDetail = (state = initialState, resource) =>
     getPlayerState(state, resource).detail

@@ -25,7 +25,7 @@ class PlayerListContainer extends Component {
     }
 
     render() {
-        const { list, loading, failed, state } = this.props
+        const { list, loading, failed } = this.props
         return <PlayerList {...{ list, loading, failed }} />
     }
 }
