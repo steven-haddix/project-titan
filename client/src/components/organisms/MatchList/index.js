@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   }
 `
 
+const formatDate = (date) => `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+
 const MatchList = ({ list, loading, failed, ...props }) => {
     return (
         <Wrapper {...props}>
@@ -18,12 +20,14 @@ const MatchList = ({ list, loading, failed, ...props }) => {
             {list.length > 0 &&
                 <Table head={
                     <tr>
+                        <TableCell heading>Date</TableCell>
                         <TableCell heading>Winner ID</TableCell>
                         <TableCell heading>Loser ID</TableCell>
                     </tr>
                 }>
                     {list.map(match =>
                         <TableRow key={match.matchId}>
+                            <TableCell>{formatDate(new Date(match.createdAt))}</TableCell>
                             <TableCell>{match.winnerId}</TableCell>
                             <TableCell>{match.loserId}</TableCell>
                         </TableRow>
