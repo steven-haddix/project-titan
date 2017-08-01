@@ -20,14 +20,14 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
                     <tr>
                         <TableCell heading>Player ID</TableCell>
                         <TableCell heading>Email</TableCell>
-                        <TableCell heading>ELO</TableCell>
+                        <TableCell heading>Rank</TableCell>
                     </tr>
                 }>
                     {list.map(player =>
                         <TableRow key={player.playerId}>
                             <TableCell>{player.playerId}</TableCell>
                             <TableCell>{player.email}</TableCell>
-                            <TableCell>{player.elo}</TableCell>
+                            <TableCell>{player.playerRank}</TableCell>
                         </TableRow>
                     )}
                 </Table>

@@ -3,7 +3,24 @@ import Elo from 'arpad';
 import * as dynamoDbLib from '../libs/dynamodb-lib';
 import { success, failure } from '../libs/response-lib';
 
-export async function getPlayerRank(playerId) {
+const provisionalThreshold = 5;
+
+const getPlayerRanks = (winner, loser) => {
+    const elo = new Elo()
+
+    let loserRank = loser.playerRank
+
+    if (!winner.isProvisional || winner.matchCount + 1 > provisionalThreshold ) {
+        loserRank = elo.newRatingIfLost(loser.playerRank, winner.playerRank)
+    }
+
+    return {
+        winnerRank: elo.newRatingIfWon(winner.playerRank, loser.playerRank),
+        loserRank
+    }
+}
+
+export async function getPlayer(playerId) {
     const params = {
         TableName: 'TitanPlayers',
         // 'Key' defines the partition key and sort key of the time to be retrieved
@@ -14,47 +31,40 @@ export async function getPlayerRank(playerId) {
         },
     };
 
-    try {
-        const result = await dynamoDbLib.call('get', params);
-        if (result.Item) {
-            // Return the retrieved item
-            return result.Item.rank.N
-        }
-        else {
-            callback(null, failure({status: false, error: 'Item not found.'}));
-        }
-    }
-    catch(e) {
-        callback(null, failure({status: false}));
+    const result = await dynamoDbLib.call('get', params);
+    if (result.Item) {
+        return result.Item
+    } else {
+        throw new Error(`Unable to get player rank for ${playerId}`)
     }
 }
 
-export async function updatePlayerRank(playerId, rank) {
+export async function updatePlayerRank(player, rank) {
     const params = {
         TableName: 'TitanPlayers',
         // 'Key' defines the partition key and sort key of the time to be updated
         // - 'userId': User Pool sub of the authenticated user
         // - 'noteId': path parameter
         Key: {
-            playerId: playerId,
+            playerId: player.playerId,
         },
         // 'UpdateExpression' defines the attributes to be updated
         // 'ExpressionAttributeValues' defines the value in the update expression
-        UpdateExpression: 'SET rank = :rank',
-        ExpressionAttributeValues: { ':rank': rank ? rank : null },
+        UpdateExpression: 'SET playerRank = :playerRank, matchCount = :matchCount, isProvisional = :isProvisional',
+        ExpressionAttributeValues: {
+            ':playerRank': rank,
+            ':matchCount': player.matchCount !== undefined ? player.matchCount + 1 : 1,
+            ':isProvisional': player.matchCount + 1 <= provisionalThreshold
+        },
         ReturnValues: 'ALL_NEW',
     };
 
-    try {
-        const result = await dynamoDbLib.call('update', params);
-        return rank
-    }
-    catch(e) {
-        callback(null, failure({status: false}));
-    }
-};
+    await dynamoDbLib.call('update', params);
+    return rank;
+}
 
-export async function main(event, context, callback) {
+export async function handler(event, context, callback) {
+    console.log('Event: ', event)
     const params = {
         TableName: 'TitanMatches',
         Item: {
@@ -66,26 +76,34 @@ export async function main(event, context, callback) {
     };
 
     try {
-        const elo = new Elo()
-        const oldWinnerRank = await getPlayerRank(event.winnerId)
-        const oldLoserRank = await getPlayerRank(event.loserId)
-        const newWinnerRank = await updatePlayerRank(event.winnerId, elo.newRatingIfWon(oldWinnerRank, oldLoserRank))
-        const newLoserRank = await updatePlayerRank(event.loserId, elo.newRatingIfWon(oldLoserRank, oldWinnerRank))
-        const result = await dynamoDbLib.call('put', params);
+        const winner = await getPlayer(event.winnerId)
+        console.log(`Old winner rank: ${winner.playerRank}`)
+        const loser = await getPlayer(event.loserId)
+        console.log(`Old loser rank: ${loser.playerRank}`)
+
+        const playerRanks = getPlayerRanks(winner, loser)
+        await updatePlayerRank(winner, playerRanks.winnerRank)
+        console.log(`New winner rank: ${playerRanks.winnerRank}`)
+
+        await updatePlayerRank(loser, playerRanks.loserRank)
+        console.log(`New loser rank: ${playerRanks.loserRank}`)
+
+        const result = await dynamoDbLib.call('put', params)
 
         callback(null, success({
             winner: {
                 id: event.winnerId,
-                oldRank: oldWinnerRank,
-                newRank: newWinnerRank
+                oldRank: winner.playerRank,
+                newRank: playerRanks.winnerRank
             },
             loser: {
                 id: event.loserId,
-                oldRank: oldLoserRank,
-                newRank: newLoserRank
+                oldRank: loser.playerRank,
+                newRank: playerRanks.loserRank
             }
         }));
     } catch(e) {
-        callback(null, failure({status: false}));
+        console.log(e)
+        callback(null, failure({ message: e }));
     }
-};
+}

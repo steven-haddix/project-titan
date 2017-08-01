@@ -7,7 +7,8 @@ export async function handler(event, context, callback) {
         Item: {
             playerId: event.userName,
             email: event.request.userAttributes.email,
-            elo: 1000,
+            playerRank: 1000,
+            matchCount: 0,
             isProvisional: true,
             createdAt: new Date().getTime()
         },
