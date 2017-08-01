@@ -34,6 +34,14 @@ functions:
           path: api/match/create
           method: post
           cors: true
+  match-list:
+      handler: match/list.handler
+      memorySize: 128
+      events:
+        - http:
+            path: api/match/list
+            method: get
+            cors: true
   player-list:
     handler: player/list.handler
     memorySize: 128

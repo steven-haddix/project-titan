@@ -10,6 +10,7 @@ module.exports = {
     // the webpack config) as an entry
     entry: {
         'match/create': './match/create.js',
+        'match/list': './match/list.js',
         'player/create': './player/create.js',
         'player/list': './player/list.js'
     },
