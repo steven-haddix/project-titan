@@ -12,7 +12,7 @@ const onSubmit = (data, dispatch, props) =>
         .then(() => props.history.push('/confirm'))
 
 const validate = createValidator({
-    Username: [required],
+    Email: [required],
     Password: [required],
 })
 

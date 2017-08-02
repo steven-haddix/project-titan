@@ -8,9 +8,10 @@ import { ConfirmForm } from 'components'
 const ConfirmFormContainer = props => <ConfirmForm {...props} />
 
 const onSubmit = (data, dispatch) => dispatch(authConfirmRequest('cognito', data))
+    .then(() => props.history.push('/'))
 
 const validate = createValidator({
-    Username: [required],
+    Email: [required],
     ConfirmationCode: [required],
 })
 

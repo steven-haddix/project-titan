@@ -61,7 +61,7 @@ const StyledIcon = styled(Icon)`
 
 const IconButton = ({ icon, children, ...props }) => {
   const { breakpoint, right, responsive, height } = props
-  const iconElement = <StyledIcon height={height / 2.5} icon={icon} />
+  const iconElement = icon && <StyledIcon height={height / 2.5} icon={icon} />
   return (
     <StyledButton hasText={!!children} {...props}>
       <Wrapper>
@@ -76,7 +76,7 @@ const IconButton = ({ icon, children, ...props }) => {
 }
 
 IconButton.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   responsive: PropTypes.bool,
   breakpoint: PropTypes.number,
   collapsed: PropTypes.bool,

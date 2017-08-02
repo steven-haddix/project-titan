@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { size } from 'styled-theme'
 
 const Wrapper = styled.div`
+  background-color: #F3F3F3;
   display: flex;
   flex-direction: column;
   padding-top: 3.75rem;
@@ -26,7 +27,7 @@ const Hero = styled.section``
 const Content = styled.section`
   width: 100%;
   box-sizing: border-box;
-  margin: 2rem auto;
+  margin: 3rem auto;
   max-width: ${size('maxWidth')};
 `
 

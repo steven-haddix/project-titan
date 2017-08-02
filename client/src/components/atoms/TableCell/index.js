@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 const styles = css`
-  text-align: left;
+  text-align: ${(props) => props.align ? props.align : 'left'};
   padding: 0.75em;
 `
 
@@ -17,6 +17,7 @@ const TableCell = ({ heading, children, ...props }) => {
 TableCell.propTypes = {
   heading: PropTypes.bool,
   children: PropTypes.any,
+  align: PropTypes.string,
 }
 
 export default TableCell

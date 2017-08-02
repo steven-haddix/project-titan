@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 
-import { Button, Block, ReduxField, Link } from 'components'
+import { Button, Block, ReduxField, Link, IconButton } from 'components'
 import { Modal } from 'containers'
 
 const Error = styled(Block)`
@@ -12,8 +12,8 @@ const Error = styled(Block)`
 const Form = styled.form`
 `
 
-const SignUpLinkStyled = styled.div`
-    margin: 1em 0;
+const SignUpStyled = styled.div`
+    margin: 1rem 0;
 `
 
 const LoginForm = ({ handleSubmit, submitting, error, ...props }) => {
@@ -25,8 +25,12 @@ const LoginForm = ({ handleSubmit, submitting, error, ...props }) => {
             <Error role="alert" palette="danger">
                 {error}
             </Error>}
-            <Button type="submit" disabled={submitting}>Login</Button>
-            <Link to="/sign-up" activeClassName="active">Sign Up</Link>
+            <IconButton type="submit" disabled={submitting} icon={submitting ? 'spinner' : undefined}>
+                Login
+            </IconButton>
+            <SignUpStyled>
+                No Account yet? <Link to="/sign-up" activeClassName="active">Sign Up</Link>
+            </SignUpStyled>
         </Form>
     )
 }

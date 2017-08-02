@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Table, TableCell, TableRow, LoadingSpinner  } from 'components'
+import Icon from "../../atoms/Icon/index";
 
 const Wrapper = styled.div`
   & > * {
@@ -10,14 +11,19 @@ const Wrapper = styled.div`
   }
 `
 
+const SpinnerContainer = styled.div`
+    text-align: center;
+`
+
 const PlayerList = ({ list, loading, failed, ...props }) => {
     return (
         <Wrapper {...props}>
-            {!list.length && loading && <LoadingSpinner loading={loading} />}
+            {!list.length && loading && <SpinnerContainer><LoadingSpinner loading={loading} /></SpinnerContainer>}
             {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
             {list.length > 0 &&
                 <Table head={
                     <tr>
+                        <TableCell></TableCell>
                         <TableCell heading>Player ID</TableCell>
                         <TableCell heading>Email</TableCell>
                         <TableCell heading>Rank</TableCell>
@@ -25,6 +31,9 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
                 }>
                     {list.map(player =>
                         <TableRow key={player.playerId}>
+                            <TableCell align="center">
+                                <Icon icon="user" height={50} hasStroke={false} />
+                            </TableCell>
                             <TableCell>{player.playerId}</TableCell>
                             <TableCell>{player.email}</TableCell>
                             <TableCell>{player.playerRank}</TableCell>

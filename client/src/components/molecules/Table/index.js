@@ -9,7 +9,7 @@ const StyledTable = styled.table`
   font-family: ${font('primary')};
   border-collapse: collapse;
   width: 100%;
-  border: 1px solid ${palette('grayscale', 1, true)};
+  border: 0px solid ${palette('grayscale', 1, true)};
   color: ${palette('grayscale', 0)};
 `
 

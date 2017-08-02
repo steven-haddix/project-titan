@@ -23,7 +23,7 @@ const Wrapper = styled.span`
     width: 100%;
     height: 100%;
     fill: currentcolor;
-    stroke: currentcolor;
+    stroke: ${props => props.hasStroke ? 'currentcolor' : 'none'};
   }
 `
 
@@ -38,6 +38,7 @@ Icon.propTypes = {
   height: PropTypes.number,
   palette: PropTypes.string,
   reverse: PropTypes.bool,
+  hasStroke: PropTypes.bool,
 }
 
 export default Icon

@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 
-import { Button, Block, ReduxField } from 'components'
+import { Button, Block, ReduxField, IconButton } from 'components'
 import { Modal } from 'containers'
 
 const Error = styled(Block)`
@@ -10,10 +10,9 @@ const Error = styled(Block)`
 `
 
 const Form = styled.form`
-`
-
-const SignUpLinkStyled = styled.div`
-    margin: 1em 0;
+    button:not(:first-of-type) {
+        margin-left: 1em;
+    }
 `
 
 const ConfirmForm = ({ handleSubmit, resendConfirmationCode, submitting, error, ...props }) => {
@@ -25,7 +24,9 @@ const ConfirmForm = ({ handleSubmit, resendConfirmationCode, submitting, error, 
             <Error role="alert" palette="danger">
                 {error}
             </Error>}
-            <Button type="submit" disabled={submitting}>Confirm</Button>
+            <IconButton type="submit" disabled={submitting} icon={submitting ? 'spinner' : undefined}>
+                Confirm
+            </IconButton>
             <Button onClick={resendConfirmationCode}>Resend</Button>
         </Form>
     )

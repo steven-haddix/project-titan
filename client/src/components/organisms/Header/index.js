@@ -10,9 +10,9 @@ const Wrapper = styled(Block)`
   justify-content: center;
   padding: 1rem;
   
-  -webkit-box-shadow: 0px 9px 5px -1px rgba(0,0,0,0.1);
-  -moz-box-shadow: 0px 9px 5px -1px rgba(0,0,0,0.1);
-  box-shadow: 0px 9px 5px -1px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.1);
   
   @media screen and (max-width: 640px) {
     padding: 0.5rem;
