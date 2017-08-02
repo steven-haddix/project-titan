@@ -1,5 +1,4 @@
 {
-  "AWS_ACCOUNT_ID": "AKIAIMXZUZE26K3O5DQQ",
   "REGION": "us-east-1",
   "BUCKET": "titan-auth",
   "MAX_AGE": "10",
