@@ -1,6 +1,6 @@
 {
   "REGION": "us-east-1",
-  "BUCKET": "titan-auth",
+  "BUCKET": "titan",
   "MAX_AGE": "10",
   "DDB_PLAYERS_TABLE": "TitanPlayers",
   "DDB_MATCHES_TABLE": "TitanMatches",
