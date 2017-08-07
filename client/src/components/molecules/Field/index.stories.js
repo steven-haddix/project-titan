@@ -19,7 +19,11 @@ storiesOf('Field', module)
         <Field name="field" label="Label" type="textarea" />
     ))
     .add('type select', () => (
-        <Field name="field" label="Label" type="select" />
+        <Field name="field" label="Label" type="select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+        </Field>
     ))
     .add('type checkbox', () => (
         <Field name="field" label="Label" type="checkbox" />

@@ -59,9 +59,9 @@ const StyledIcon = styled(Icon)`
   flex: none;
 `
 
-const IconButton = ({ icon, children, ...props }) => {
+const IconButton = ({ icon, children, noFill, hasStroke, ...props }) => {
   const { breakpoint, right, responsive, height } = props
-  const iconElement = icon && <StyledIcon height={height / 2.5} icon={icon} />
+  const iconElement = icon && <StyledIcon height={height / 2.5} icon={icon} hasStroke noFill/>
   return (
     <StyledButton hasText={!!children} {...props}>
       <Wrapper>

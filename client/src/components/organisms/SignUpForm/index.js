@@ -18,8 +18,10 @@ const SignUpLinkStyled = styled.div`
 const SignUpForm = ({ handleSubmit, submitting, error, ...props }) => {
     return (
         <Form onSubmit={handleSubmit}>
-            <Field name="Email" label="Email" component={ReduxField}  />
+            <Field name="Email" label="Email" type="email" component={ReduxField}  />
             <Field name="Password" label="Password" type="password" component={ReduxField} />
+            <Field name="FirstName" label="First Name" type="text" component={ReduxField} />
+            <Field name="LastName" label="Last Name" type="text" component={ReduxField} />
             { error &&
             <Error role="alert" palette="danger">
                 {error}

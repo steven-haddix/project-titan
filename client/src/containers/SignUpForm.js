@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { authSignUpRequest } from 'store/actions'
-import { createValidator, required } from 'services/validation'
+import { createValidator, required, match } from 'services/validation'
 
 import { SignUpForm } from 'components'
 
