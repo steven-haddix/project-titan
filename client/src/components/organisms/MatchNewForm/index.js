@@ -24,14 +24,14 @@ const MatchNewForm = ({ winnerList, loserList, handleSubmit, submitting, error, 
         <Form onSubmit={handleSubmit}>
             <FlexStyled direction={[ 'column', 'row' ]}>
                 <Box width={[1, 1/2]} mr={[0, 8]} ml={0}>
-                    <Field name="winner" label="Winner" type="select" component={ReduxField}>
+                    <Field name="winnerId" label="Winner" type="select" component={ReduxField}>
                         <option>----- Select Player -----</option>
                         {winnerList.map(player =>
                             <option key={uuidv4()} value={player.playerId}>{player.email}</option>)}
                     </Field>
                 </Box>
                 <Box width={[1, 1/2]} mr={0} ml={[0, 8]}>
-                    <Field name="loser" label="Loser" type="select" component={ReduxField}>
+                    <Field name="loserId" label="Loser" type="select" component={ReduxField}>
                         <option>----- Select Player -----</option>
                         {loserList.map(player =>
                             <option key={uuidv4()} value={player.playerId}>{player.email}</option>)}

@@ -10,12 +10,12 @@ export function* matchList(api, { params }, { resource, thunk }) {
     }
 }
 
-export function* matchCreate(api, { params }, { resource, thunk }) {
+export function* matchCreate(api, { data }, { resource, thunk }) {
     try {
-        const list = yield call([api, api.get], `/${resource}/create`, { params })
-        yield put(actions.matchCreateSuccess(resource, list, { params }, thunk))
+        const list = yield call([api, api.post], `/${resource}/create`, { ...data })
+        yield put(actions.matchCreateSuccess(resource, list, { data }, thunk))
     } catch (e) {
-        yield put(actions.matchCreateFailure(resource, e, { params }, thunk))
+        yield put(actions.matchCreateFailure(resource, e, { data }, thunk))
     }
 }
 

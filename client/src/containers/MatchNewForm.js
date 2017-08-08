@@ -37,8 +37,8 @@ const getFormValue = (state, att) =>
     getFormValues('MatchNewForm')(state) ? getFormValues('MatchNewForm')(state)[att] : []
 
 const mapStateToProps = state => ({
-    winnerList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'loser'), 'playerId'),
-    loserList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'winner'), 'playerId'),
+    winnerList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'loserId'), 'playerId'),
+    loserList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'winnerId'), 'playerId'),
     loading: isPending(state, 'playerList'),
     failed: hasFailed(state, 'playerList'),
 })

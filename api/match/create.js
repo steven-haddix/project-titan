@@ -65,20 +65,25 @@ export async function updatePlayerRank(player, rank) {
 
 export async function handler(event, context, callback) {
     console.log('Event: ', event)
+    const body = JSON.parse(event.body);
+    console.log('Body: ', body)
+    const winnerId = body.winnerId;
+    const loserId = body.loserId;
+
     const params = {
         TableName: 'TitanMatches',
         Item: {
-            winnerId: event.winnerId,
-            loserId: event.loserId,
+            winnerId: winnerId,
+            loserId: loserId,
             matchId: uuid.v4(),
             createdAt: new Date().getTime(),
         },
     };
 
     try {
-        const winner = await getPlayer(event.winnerId)
+        const winner = await getPlayer(winnerId)
         console.log(`Old winner rank: ${winner.playerRank}`)
-        const loser = await getPlayer(event.loserId)
+        const loser = await getPlayer(loserId)
         console.log(`Old loser rank: ${loser.playerRank}`)
 
         const playerRanks = getPlayerRanks(winner, loser)
@@ -92,12 +97,12 @@ export async function handler(event, context, callback) {
 
         callback(null, success({
             winner: {
-                id: event.winnerId,
+                id: winnerId,
                 oldRank: winner.playerRank,
                 newRank: playerRanks.winnerRank
             },
             loser: {
-                id: event.loserId,
+                id: loserId,
                 oldRank: loser.playerRank,
                 newRank: playerRanks.loserRank
             }
