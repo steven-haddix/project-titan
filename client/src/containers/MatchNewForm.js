@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import { isPending, hasFailed } from 'redux-saga-thunk'
 import { createValidator, required } from 'services/validation'
 import { fromPlayer } from 'store/selectors'
 import { matchCreateRequest } from 'store/actions'
 
 import { MatchNewForm } from 'components'
-import {playerListRequest} from "../store/player/actions";
+import { playerListRequest } from "../store/player/actions";
 
 class MatchNewFormContainer extends Component {
     static propTypes = {
-        playerList: PropTypes.arrayOf(PropTypes.object).isRequired,
+        winnerList: PropTypes.arrayOf(PropTypes.object).isRequired,
+        loserList: PropTypes.arrayOf(PropTypes.object).isRequired,
         limit: PropTypes.number,
         loading: PropTypes.bool,
         failed: PropTypes.bool,
@@ -28,13 +29,16 @@ class MatchNewFormContainer extends Component {
     }
 
     render() {
-        const { playerList, loading, failed } = this.props
-        return <MatchNewForm {...{ playerList, loading, failed }} />
+        return <MatchNewForm {...this.props} />
     }
 }
 
+const getFormValue = (state, att) =>
+    getFormValues('MatchNewForm')(state) ? getFormValues('MatchNewForm')(state)[att] : []
+
 const mapStateToProps = state => ({
-    playerList: fromPlayer.getList(state, 'player'),
+    winnerList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'loser'), 'playerId'),
+    loserList: fromPlayer.getFilteredList(state, 'player', getFormValue(state, 'winner'), 'playerId'),
     loading: isPending(state, 'playerList'),
     failed: hasFailed(state, 'playerList'),
 })
@@ -44,13 +48,12 @@ const mapDispatchToProps = (dispatch, { limit }) => ({
 })
 
 const validate = createValidator({
-    player1: [required],
-    player2: [required],
+    winner: [(value) => value && value.includes('-----') && 'Required field'],
+    loser: [(value) => value && value.includes('-----') && 'Required field'],
 })
 
 const onSubmit = (data, dispatch, props) =>
-    dispatch(matchCreateRequest('cognito', data))
-        .then(() => props.history.push('/matches'))
+    dispatch(matchCreateRequest('match', data))
 
 MatchNewFormContainer = reduxForm({
     form: 'MatchNewForm',

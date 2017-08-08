@@ -19,21 +19,21 @@ const Form = styled.form`
 const FieldStyled = styled.div`
 `
 
-const MatchNewForm = ({ playerList, handleSubmit, submitting, error, ...props }) => {
+const MatchNewForm = ({ winnerList, loserList, handleSubmit, submitting, error, ...props }) => {
     return (
         <Form onSubmit={handleSubmit}>
             <FlexStyled direction={[ 'column', 'row' ]}>
                 <Box width={[1, 1/2]} mr={[0, 8]} ml={0}>
-                    <Field name="Player1" label="Player 1" type="select" component={ReduxField}>
-                        <option value="null">----- Select Player -----</option>
-                        {playerList.map(player =>
+                    <Field name="winner" label="Winner" type="select" component={ReduxField}>
+                        <option>----- Select Player -----</option>
+                        {winnerList.map(player =>
                             <option key={uuidv4()} value={player.playerId}>{player.email}</option>)}
                     </Field>
                 </Box>
                 <Box width={[1, 1/2]} mr={0} ml={[0, 8]}>
-                    <Field name="Player2" label="Player 2" type="select" component={ReduxField}>
+                    <Field name="loser" label="Loser" type="select" component={ReduxField}>
                         <option>----- Select Player -----</option>
-                        {playerList.map(player =>
+                        {loserList.map(player =>
                             <option key={uuidv4()} value={player.playerId}>{player.email}</option>)}
                     </Field>
                 </Box>
