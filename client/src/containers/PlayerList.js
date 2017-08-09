@@ -31,7 +31,6 @@ class PlayerListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state,
     list: fromPlayer.getList(state, 'player'),
     loading: isPending(state, 'playerList'),
     failed: hasFailed(state, 'playerList'),

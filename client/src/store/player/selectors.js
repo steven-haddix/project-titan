@@ -13,3 +13,8 @@ export const getList = (state = initialState, resource) =>
 
 export const getDetail = (state = initialState, resource) =>
     getPlayerState(state, resource).detail
+
+export const getFilteredList = (state = initialState, resource, filterValue, resourceAttribute) =>
+    getList(state, resource).filter(player => player[resourceAttribute] !== filterValue)
+
+

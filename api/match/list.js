@@ -5,6 +5,7 @@ import { success, failure } from '../libs/response-lib';
 export async function handler(event, context, callback) {
     const params = {
         TableName: config.DDB_MATCHES_TABLE,
+        IndexName: "createdAtIndex"
     };
 
     try {

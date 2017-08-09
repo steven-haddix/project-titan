@@ -17,8 +17,8 @@ const TileStyled = styled.div`
 
 const Tile = ({ heading, children }) => (
     <TileStyled>
-        <Heading level={1}>{heading}</Heading>
-        <HorizontalRule />
+        {heading && typeof heading === 'string' && <div><Heading level={1}>{heading}</Heading><HorizontalRule/></div>}
+        {heading && React.isValidElement(heading) && heading}
         {children}
     </TileStyled>
 )

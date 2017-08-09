@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { PageTemplate, Header, Tile } from 'components'
+import { PageTemplate, MatchHeader, Header, Tile, IconButton } from 'components'
 import { MatchList } from 'containers'
 
 const MatchPage = () => {
     return (
         <PageTemplate header={<Header/>} hero={<div/>} footer={<div/>}>
-            <Tile heading="Matches">
+            <Tile heading={<MatchHeader />}>
                 <MatchList/>
             </Tile>
         </PageTemplate>

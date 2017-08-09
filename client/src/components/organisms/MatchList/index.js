@@ -14,7 +14,7 @@ const SpinnerContainer = styled.div`
     text-align: center;
 `
 
-const formatDate = (date) => `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+const formatDate = (date) => `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getMinutes()}:${date.getSeconds()}`
 
 const MatchList = ({ list, loading, failed, ...props }) => {
     return (

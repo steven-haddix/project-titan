@@ -31,3 +31,38 @@ export const matchListFailure = (resource, error, request, thunk) => ({
         thunk,
     },
 })
+
+export const MATCH_CREATE_REQUEST = 'MATCH_CREATE_REQUEST'
+export const MATCH_CREATE_SUCCESS = 'MATCH_CREATE_SUCCESS'
+export const MATCH_CREATE_FAILURE = 'MATCH_CREATE_FAILURE'
+
+export const matchCreateRequest = (resource, data) => ({
+    type: MATCH_CREATE_REQUEST,
+    payload: { data },
+    meta: {
+        resource,
+        thunk: `${resource}Create`,
+    },
+})
+
+export const matchCreateSuccess = (resource, detail, request, thunk) => ({
+    type: MATCH_CREATE_SUCCESS,
+    payload: detail,
+    meta: {
+        request,
+        thunk,
+        resource,
+        entities: resource,
+    },
+})
+
+export const matchCreateFailure = (resource, error, request, thunk) => ({
+    type: MATCH_CREATE_FAILURE,
+    error: true,
+    payload: error,
+    meta: {
+        request,
+        resource,
+        thunk,
+    },
+})
