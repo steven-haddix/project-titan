@@ -63,12 +63,24 @@ resources:
         AttributeDefinitions:
           - AttributeName: matchId
             AttributeType: S
+          - AttributeName: createdAt
+            AttributeType: N
         KeySchema:
           - AttributeName: matchId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        GlobalSecondaryIndexes:
+          - IndexName: createdAtIndex
+            KeySchema:
+              - AttributeName: createdAt
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
     playersTable:
           Type: AWS::DynamoDB::Table
           Properties:
@@ -76,9 +88,21 @@ resources:
             AttributeDefinitions:
               - AttributeName: playerId
                 AttributeType: S
+              - AttributeName: playerRank
+                AttributeType: N
             KeySchema:
               - AttributeName: playerId
                 KeyType: HASH
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
+            GlobalSecondaryIndexes:
+              - IndexName: playerRankIndex
+                KeySchema:
+                  - AttributeName: playerRank
+                    KeyType: HASH
+                Projection:
+                  ProjectionType: ALL
+                ProvisionedThroughput:
+                  ReadCapacityUnits: 1
+                  WriteCapacityUnits: 1

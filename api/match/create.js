@@ -28,10 +28,13 @@ export async function getPlayer(playerId) {
         // - 'noteId': path parameter
         Key: {
             playerId: playerId,
+            playerRank: undefined,
         },
     };
-
+    console.log('Get player params', params)
     const result = await dynamoDbLib.call('get', params);
+    console.log('Player result', result)
+
     if (result.Item) {
         return result.Item
     } else {
