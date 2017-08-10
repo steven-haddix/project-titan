@@ -76,6 +76,7 @@ export async function handler(event, context, callback) {
     const params = {
         TableName: 'TitanMatches',
         Item: {
+            partitionKey: 1,
             winnerId: winnerId,
             loserId: loserId,
             matchId: uuid.v4(),

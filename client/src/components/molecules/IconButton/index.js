@@ -61,7 +61,7 @@ const StyledIcon = styled(Icon)`
 
 const IconButton = ({ icon, children, noFill, hasStroke, ...props }) => {
   const { breakpoint, right, responsive, height } = props
-  const iconElement = icon && <StyledIcon height={height / 2.5} icon={icon} hasStroke noFill/>
+  const iconElement = icon && <StyledIcon height={height / 2.5} icon={icon} hasStroke noFill={noFill}/>
   return (
     <StyledButton hasText={!!children} {...props}>
       <Wrapper>

@@ -38,7 +38,7 @@ const MatchNewForm = ({ winnerList, loserList, handleSubmit, submitting, error, 
                     </Field>
                 </Box>
             </FlexStyled>
-            <IconButton type="submit" disabled={submitting} icon={submitting ? 'spinner' : undefined}>
+            <IconButton noFill type="submit" disabled={submitting} icon={submitting ? 'spinner' : undefined}>
                 Submit
             </IconButton>
         </Form>

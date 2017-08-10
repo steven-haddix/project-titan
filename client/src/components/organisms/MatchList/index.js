@@ -14,7 +14,14 @@ const SpinnerContainer = styled.div`
     text-align: center;
 `
 
-const formatDate = (date) => `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+const twelveHourTime = (hour, minute) => {
+    let h = hour % 12;
+    if (h === 0) h = 12;
+    return (h < 10 ? '0' : '') + h + ':' + minute + '' + (hour < 12 ? 'am' : 'pm');
+}
+
+const formatDate = (date) =>
+    `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${twelveHourTime(date.getHours(), date.getMinutes())}`
 
 const MatchList = ({ list, loading, failed, ...props }) => {
     return (
@@ -33,9 +40,9 @@ const MatchList = ({ list, loading, failed, ...props }) => {
                     {list.map(match =>
                         <TableRow key={match.matchId}>
                             <TableCell>{formatDate(new Date(match.createdAt))}</TableCell>
-                            <TableCell align="center">{match.winnerId}</TableCell>
+                            <TableCell align="left">{match.winnerEmail}</TableCell>
                             <TableCell align="center"><Icon icon="battle" height={30}/></TableCell>
-                            <TableCell align="center">{match.loserId}</TableCell>
+                            <TableCell align="left">{match.loserEmail}</TableCell>
                         </TableRow>
                     )}
                 </Table>
