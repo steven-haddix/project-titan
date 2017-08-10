@@ -2,12 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Table, TableCell, TableRow, LoadingSpinner, Icon  } from 'components'
+import { Table, TableCell, TableRow, Heading, LoadingSpinner, Icon  } from 'components'
 
 const Wrapper = styled.div`
   & > * {
     margin: 1rem;
   }
+`
+
+const ErrorMessageStyled = styled.div`
+    margin: 4em 0;
+    text-align: center;
 `
 
 const SpinnerContainer = styled.div`
@@ -27,6 +32,10 @@ const MatchList = ({ list, loading, failed, ...props }) => {
     return (
         <Wrapper {...props}>
             {!list.length && <SpinnerContainer><LoadingSpinner loading={loading} /></SpinnerContainer>}
+            {!loading && !list.length &&
+                <ErrorMessageStyled>
+                    <Heading level={3}>Uh Oh! There don't appear to be any matches!</Heading>
+                </ErrorMessageStyled>}
             {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
             {list.length > 0 &&
                 <Table head={
