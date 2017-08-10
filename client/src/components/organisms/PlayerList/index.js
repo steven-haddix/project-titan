@@ -24,8 +24,9 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
                 <Table head={
                     <tr>
                         <TableCell></TableCell>
-                        <TableCell heading>Player ID</TableCell>
                         <TableCell heading>Email</TableCell>
+                        <TableCell align="center" heading>Match Count</TableCell>
+                        <TableCell align="center" heading>Provisional?</TableCell>
                         <TableCell heading>Rank</TableCell>
                     </tr>
                 }>
@@ -34,8 +35,9 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
                             <TableCell align="center">
                                 <Icon icon="user" height={50} hasStroke={false} />
                             </TableCell>
-                            <TableCell>{player.playerId}</TableCell>
                             <TableCell>{player.email}</TableCell>
+                            <TableCell align="center">{player.matchCount}</TableCell>
+                            <TableCell align="center">{player.isProvisional ? 'Y' : 'N'}</TableCell>
                             <TableCell>{player.playerRank}</TableCell>
                         </TableRow>
                     )}

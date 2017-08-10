@@ -5,6 +5,7 @@ export async function handler(event, context, callback) {
     const params = {
         TableName: config.DDB_PLAYERS_TABLE,
         Item: {
+            partitionKey: 1,
             playerId: event.userName,
             email: event.request.userAttributes.email,
             playerRank: 1000,

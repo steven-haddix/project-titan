@@ -61,6 +61,8 @@ resources:
       Properties:
         TableName: TitanMatches
         AttributeDefinitions:
+          - AttributeName: partitionKey
+            AttributeType: N
           - AttributeName: matchId
             AttributeType: S
           - AttributeName: createdAt
@@ -72,10 +74,12 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         GlobalSecondaryIndexes:
-          - IndexName: createdAtIndex
+          - IndexName: partitionKeyIndex
             KeySchema:
-              - AttributeName: createdAt
+              - AttributeName: partitionKey
                 KeyType: HASH
+              - AttributeName: createdAt
+                KeyType: RANGE
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput:
@@ -86,6 +90,8 @@ resources:
           Properties:
             TableName: TitanPlayers
             AttributeDefinitions:
+              - AttributeName: partitionKey
+                AttributeType: N
               - AttributeName: playerId
                 AttributeType: S
               - AttributeName: playerRank
@@ -97,10 +103,12 @@ resources:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
             GlobalSecondaryIndexes:
-              - IndexName: playerRankIndex
+              - IndexName: partitionKeyIndex
                 KeySchema:
-                  - AttributeName: playerRank
+                  - AttributeName: partitionKey
                     KeyType: HASH
+                  - AttributeName: playerRank
+                    KeyType: RANGE
                 Projection:
                   ProjectionType: ALL
                 ProvisionedThroughput:

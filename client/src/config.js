@@ -6,7 +6,7 @@ const config = {
         isDev: process.env.NODE_ENV !== 'production',
         basename: process.env.PUBLIC_PATH,
         isBrowser: typeof window !== 'undefined',
-        apiUrl: 'https://a08hkc8pw3.execute-api.us-east-1.amazonaws.com/dev/api',
+        apiUrl: 'https://iqm9qsbm9l.execute-api.us-east-1.amazonaws.com/dev/api',
         fbAppId: '991453140998882',
         googleClientId: '464712936089-q953apdu1bjiqtcjndktnnk1ts4f2cgv.apps.googleusercontent.com',
         gtmId: 'GTM-WX5ZNVC',
@@ -20,7 +20,7 @@ const config = {
     test: {},
     development: {},
     production: {
-        apiUrl: 'https://a08hkc8pw3.execute-api.us-east-1.amazonaws.com/dev/api',
+        apiUrl: 'https://iqm9qsbm9l.execute-api.us-east-1.amazonaws.com/dev/api',
     },
 }
 
