@@ -63,8 +63,7 @@ const MatchList = ({ list, loading, failed, ...props }) => {
                     <Heading level={3}>Uh Oh! There don't appear to be any matches!</Heading>
                 </ErrorMessageStyled>}
             {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
-            {list.length > 0 &&
-            <div>
+            {list.length > 0 && <div>
                 <Flex direction={"row"} is={Hide} xs>
                     <CellHeader w={[1, 1/6]}>Date</CellHeader>
                     <CellHeader w={[1, 2/6]} justify="center">Winner</CellHeader>
@@ -89,25 +88,7 @@ const MatchList = ({ list, loading, failed, ...props }) => {
                         </MatchContainer>
                     )}
                 </Flex>
-                <Table head={
-                    <tr>
-                        <TableCell heading>Date</TableCell>
-                        <TableCell heading>Winner ID</TableCell>
-                        <TableCell/>
-                        <TableCell heading>Loser ID</TableCell>
-                    </tr>
-                }>
-                    {list.map(match =>
-                        <TableRow key={match.matchId}>
-                            <TableCell>{formatDate(new Date(match.createdAt))}</TableCell>
-                            <TableCell align="left">{match.winnerEmail}</TableCell>
-                            <TableCell align="center"><Icon icon="battle" height={30}/></TableCell>
-                            <TableCell align="left">{match.loserEmail}</TableCell>
-                        </TableRow>
-                    )}
-                </Table>
             </div>
-
             }
         </Wrapper>
     )
