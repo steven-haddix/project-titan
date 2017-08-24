@@ -49,8 +49,7 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
             {list.length > 0 && <div>
                 <Flex direction={"row"} is={Hide} xs>
                     <CellHeader w={[1, 1/5]}/>
-                    <CellHeader w={[1, 2/5]}>Email</CellHeader>
-                    <CellHeader w={[1, 1/5]} justify="center">Matches</CellHeader>
+                    <CellHeader w={[1, 3/5]}>Email</CellHeader>
                     <CellHeader w={[1, 1/5]} justify="center">Rank</CellHeader>
                 </Flex>
                 <Flex direction="column">
@@ -59,11 +58,8 @@ const PlayerList = ({ list, loading, failed, ...props }) => {
                             <Cell w={[1, 1/5]} justify="center">
                                 <PlayerImage icon="user" hasStroke={false} />
                             </Cell>
-                            <Cell w={[1, 2/5]} justify={['center', 'left']} align="center" mb={[10, 0]}>
+                            <Cell w={[1, 3/5]} justify={['center', 'left']} align="center" mb={[10, 0]}>
                                 {player.email}
-                            </Cell>
-                            <Cell w={[1, 1/5]} justify="center">
-                                <MobileLabel sm md lg>Matches:</MobileLabel>{player.matchCount}
                             </Cell>
                             <Cell w={[1, 1/5]} justify="center">
                                 <MobileLabel sm md lg>Rank:</MobileLabel>{player.playerRank}
