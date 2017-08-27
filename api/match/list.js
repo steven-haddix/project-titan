@@ -46,18 +46,18 @@ export async function handler(event, context, callback) {
     };
 
     try {
-        const result = await dynamoDbLib.call('query', params);
+        const result = await dynamoDbLib.call('query', params)
         if (result.Items) {
-            const promises = result.Items.map(match => getMatchPlayers(match));
+            const promises = result.Items.slice(0, 19).map(match => getMatchPlayers(match))
             console.log('Promises: ', promises)
 
             const items = await Promise.all(promises)
             console.log('Items: ', items)
             callback(null, success(items))
         } else {
-            callback(null, failure({status: false, error: 'Item not found.'}));
+            callback(null, failure({status: false, error: 'Item not found.'}))
         }
     } catch (e) {
-        callback(null, failure(e));
+        callback(null, failure(e))
     }
 };
