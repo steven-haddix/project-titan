@@ -20,12 +20,10 @@ Run unit tests:
     - Sagas
     - Reducers
 
-## Match Interface
-- Ranking Board (unimplemented)
-- Match Recording (unimplemented)
-
-## User Interface
-- ?
+## App Views
+- Ranking Board
+- Match Recording
+- Match Creation Form
 
 ## Authentication
 ### AWS Cognito Pool
