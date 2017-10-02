@@ -17,10 +17,11 @@ const config = {
             IDENTITY_POOL_ID: 'us-east-1:9f40f653-5859-49e6-8bde-503c779bb46d',
         }
     },
-    test: {},
-    development: {},
+    development: {
+        apiUrl: 'https://titans-api-dev.stevenhaddix.com/api/player/list'
+    },
     production: {
-        apiUrl: 'https://iqm9qsbm9l.execute-api.us-east-1.amazonaws.com/dev/api',
+        apiUrl: 'https://titans-api.stevenhaddix.com/api/player/list',
     },
 }
 
