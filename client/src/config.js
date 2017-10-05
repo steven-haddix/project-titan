@@ -18,10 +18,10 @@ const config = {
         }
     },
     development: {
-        apiUrl: 'https://titans-api-dev.stevenhaddix.com/api/player/list'
+        apiUrl: 'https://titans-api-dev.stevenhaddix.com/api'
     },
     production: {
-        apiUrl: 'https://titans-api.stevenhaddix.com/api/player/list',
+        apiUrl: 'https://titans-api.stevenhaddix.com/api',
     },
 }
 
