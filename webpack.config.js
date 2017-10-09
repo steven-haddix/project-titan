@@ -36,6 +36,9 @@ const assets = () => () => ({
 const resolveModules = modules => () => ({
     resolve: {
         modules: [].concat(modules, ['node_modules']),
+        alias: {
+            'prop-types': path.resolve(__dirname, 'node_modules/prop-types/'),
+        }
     },
 })
 
