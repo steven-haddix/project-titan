@@ -6,7 +6,7 @@ Install depedencies:
 ```npm install```
 
 Start server locally:
-```npm run start```
+```npm run dev```
 
 Run unit tests:
 ```npm run test```
