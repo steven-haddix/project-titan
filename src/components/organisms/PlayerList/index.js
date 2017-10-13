@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 import Hide from 'hidden-styled'
 
-import { Icon, LoadingSpinner  } from 'components'
+import { Icon, LoadingSpinner, PlayerHeader, ProvisionalHeader, Tile  } from 'components'
 
 const Wrapper = styled.div`
   & > * {
@@ -43,33 +43,66 @@ const SpinnerContainer = styled.div`
 
 const PlayerList = ({ list, loading, failed, ...props }) => {
     return (
-        <Wrapper {...props}>
-            {!list.length && loading && <SpinnerContainer><LoadingSpinner loading={loading} /></SpinnerContainer>}
-            {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
-            {list.length > 0 && <div>
-                <Flex direction={"row"} is={Hide} xs>
-                    <CellHeader w={[1, 1/5]}/>
-                    <CellHeader w={[1, 3/5]}>Email</CellHeader>
-                    <CellHeader w={[1, 1/5]} justify="center">Rank</CellHeader>
-                </Flex>
-                <Flex direction="column">
-                    {list.map(player =>
-                        <PlayerContainer direction={["column", "row"]} key={player.playerId}>
-                            <Cell w={[1, 1/5]} justify="center">
-                                <PlayerImage icon="user" hasStroke={false} />
-                            </Cell>
-                            <Cell w={[1, 3/5]} justify={['center', 'left']} align="center" mb={[10, 0]}>
-                                {player.email}
-                            </Cell>
-                            <Cell w={[1, 1/5]} justify="center">
-                                <MobileLabel sm md lg>Rank:</MobileLabel>{player.playerRank}
-                            </Cell>
-                        </PlayerContainer>
-                    )}
-                </Flex>
-            </div>
-            }
-        </Wrapper>
+        <div>
+            <Tile heading={<PlayerHeader/>}>
+                <Wrapper {...props}>
+                    {!list.length && loading && <SpinnerContainer><LoadingSpinner loading={loading} /></SpinnerContainer>}
+                    {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
+                    {list.length > 0 && <div>
+                        <Flex direction={"row"} is={Hide} xs>
+                            <CellHeader w={[1, 1/5]}/>
+                            <CellHeader w={[1, 3/5]}>Email</CellHeader>
+                            <CellHeader w={[1, 1/5]} justify="center">Rank</CellHeader>
+                        </Flex>
+                        <Flex direction="column">
+                            {list.filter(player => !player.isProvisional).map(player =>
+                                <PlayerContainer direction={["column", "row"]} key={player.playerId}>
+                                    <Cell w={[1, 1/5]} justify="center">
+                                        <PlayerImage icon="user" hasStroke={false} />
+                                    </Cell>
+                                    <Cell w={[1, 3/5]} justify={['center', 'left']} align="center" mb={[10, 0]}>
+                                        {player.email}
+                                    </Cell>
+                                    <Cell w={[1, 1/5]} justify="center">
+                                        <MobileLabel sm md lg>Rank:</MobileLabel>{player.playerRank}
+                                    </Cell>
+                                </PlayerContainer>
+                            )}
+                        </Flex>
+                    </div>
+                    }
+                </Wrapper>
+            </Tile>
+            <Tile heading={<ProvisionalHeader />}>
+                <Wrapper {...props}>
+                    {!list.length && loading && <SpinnerContainer><LoadingSpinner loading={loading} /></SpinnerContainer>}
+                    {failed && <div>Something went wrong while fetching posts. Please, try again later.</div>}
+                    {list.length > 0 && <div>
+                        <Flex direction={"row"} is={Hide} xs>
+                            <CellHeader w={[1, 1/5]}/>
+                            <CellHeader w={[1, 3/5]}>Email</CellHeader>
+                            <CellHeader w={[1, 1/5]} justify="center">Rank</CellHeader>
+                        </Flex>
+                        <Flex direction="column">
+                            {list.filter(player => !!player.isProvisional).map(player =>
+                                <PlayerContainer direction={["column", "row"]} key={player.playerId}>
+                                    <Cell w={[1, 1/5]} justify="center">
+                                        <PlayerImage icon="user" hasStroke={false} />
+                                    </Cell>
+                                    <Cell w={[1, 3/5]} justify={['center', 'left']} align="center" mb={[10, 0]}>
+                                        {player.email}
+                                    </Cell>
+                                    <Cell w={[1, 1/5]} justify="center">
+                                        <MobileLabel sm md lg>Rank:</MobileLabel>{player.playerRank}
+                                    </Cell>
+                                </PlayerContainer>
+                            )}
+                        </Flex>
+                    </div>
+                    }
+                </Wrapper>
+            </Tile>
+        </div>
     )
 }
 
